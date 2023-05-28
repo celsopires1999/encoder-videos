@@ -5,7 +5,7 @@ ENV PATH="$PATH:/bin/bash" \
     PATH="$PATH:/opt/bento4/bin"
 
 # FFMPEG
-RUN apk add --update ffmpeg bash curl make
+RUN apk add --update ffmpeg bash curl make git
 
 # Install Bento
 WORKDIR /tmp/bento4
@@ -30,6 +30,8 @@ RUN apk add --update --upgrade curl python unzip bash gcc g++ scons && \
     cp -a ${BENTO4_PATH}/Source/Python/wrappers/. ${BENTO4_PATH}/bin
 
 WORKDIR /go/src
+RUN adduser --disabled-password -u 1000 celso
+USER celso
 
 #vamos mudar para o endpoint correto. Usando top apenas para segurar o processo rodando
 ENTRYPOINT [ "top" ]
