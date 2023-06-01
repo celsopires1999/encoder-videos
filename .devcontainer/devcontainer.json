@@ -24,15 +24,16 @@
   //   },
   //   "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
   // },
-  // "customizations": {
-  //   "vscode": {
-  //     "extensions": [
-  //       "humao.rest-client",
-  //       "eamodio.gitlens",
-  //       "amazonwebservices.aws-toolkit-vscode"
-  //     ]
-  //   }
-  // }
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "humao.rest-client",
+        "eamodio.gitlens",
+        "amazonwebservices.aws-toolkit-vscode"
+      ]
+    }
+  },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
   // Uncomment the next line if you want start specific services in your Docker Compose config.
