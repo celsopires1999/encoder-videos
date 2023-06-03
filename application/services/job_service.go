@@ -9,13 +9,6 @@ import (
 	"github.com/celsopires1999/encoder/domain"
 )
 
-var (
-	inputBucketName    = "inputBucketName"
-	outputBucketName   = "outputBucketName"
-	localStoragePath   = "localStoragePath"
-	CONCURRENCY_UPLOAD = "CONCURRENCY_UPLOAD"
-)
-
 type JobService struct {
 	Job           *domain.Job
 	JobRepository repositories.JobRepository
@@ -26,7 +19,7 @@ func (j *JobService) Start() error {
 	if err := j.changeJobStatus("DOWNLOADING"); err != nil {
 		return j.failJob(err)
 	}
-	if err := j.VideoService.Download(os.Getenv(inputBucketName)); err != nil {
+	if err := j.VideoService.Download(os.Getenv("inputBucketName")); err != nil {
 		return j.failJob(err)
 	}
 
@@ -61,10 +54,10 @@ func (j *JobService) performUpload() error {
 	}
 
 	videoUpload := NewVideoUpload()
-	videoUpload.OutputBucket = os.Getenv(outputBucketName)
-	videoUpload.VideoPath = os.Getenv(localStoragePath) + "/" + j.VideoService.Video.ID
+	videoUpload.OutputBucket = os.Getenv("outputBucketName")
+	videoUpload.VideoPath = os.Getenv("localStoragePath") + "/" + j.VideoService.Video.ID
 
-	concurrency, err := strconv.Atoi(os.Getenv(CONCURRENCY_UPLOAD))
+	concurrency, err := strconv.Atoi(os.Getenv("CONCURRENCY_UPLOAD"))
 	if err != nil {
 		return err
 	}
