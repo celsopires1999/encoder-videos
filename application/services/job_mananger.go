@@ -108,6 +108,10 @@ func (j *JobManager) checkParseErrors(jobResult JobWorkerResult) error {
 
 	jobJson, err := json.Marshal(errorMsg)
 
+	if err != nil {
+		return err
+	}
+
 	err = j.notify(jobJson)
 
 	if err != nil {
